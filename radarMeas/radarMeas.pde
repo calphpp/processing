@@ -1,8 +1,6 @@
 color bgcolor = color (0,0,0);
 color gridcolor = color (0,0,0);
-color sweepercolor = color (102,250,81);
 float s;
-float rond;
 float val;
 float distance; 
 int l;
@@ -16,39 +14,60 @@ void draw(){
   background(bgcolor);
   grid(); 
   circle();
-  sector = 3;
+  sector = 0;
   getDistance();
-  //println(distance);
-  delay(1000);
-  stipje();
+  println("Sector "+ str(sector) + ": Range = " + distance + "cm");
+  //delay(1000);
+  plot();
+  
+  grid(); 
+  circle();
+  sector = 2;
+  getDistance();
+  println("Sector "+ str(sector) + ": Range = " + distance + "cm");
+  //delay(1000);
+  plot();
+  
+  grid(); 
+  circle();
+  sector = 4;
+  getDistance();
+  println("Sector "+ str(sector) + ": Range = " + distance + "cm");
+  //delay(1000);
+  plot();
 }
 
  void circle(){
    fill(color (102,250,81,60));
-   ellipse(400, 320, 600, 600);
+   ellipse(width/2, height/2, 600, 600);
  }
  
 void grid(){
   stroke(#FAF7F7);
   strokeWeight(2);
-    line(width/2, height/2, width/2,height/23);            //verticlal grid
-    line(width/2, height/2, 700,height/2 );          //horizontal grid
-     for(int i = 20; i <300; i+=20){
+    line(width/2, height/2, width/2,height/23);  //verticlal grid
+    line(100, height/2, 700,height/2 );          //horizontal grid
+    for(int i = 20; i <320; i+=20){
      line((width/2)+5,i,(width/2)-5,i);
-   }
-   for(int i = 700; i >400; i-=20){
+    }
+    for(int i = 700; i >90; i-=20){
      line(i, (height/2)+5,i,(height/2)-5 );
 }}
  
-void stipje(){
-  // 3.333 = 1in
-  distance = 300-(distance*1.05);
-  //distance = 40;   // 84in
-  //distance = 280;  // 12in
-  // distance = 300; // 6in
-  println(str(distance));
-  // ellipse(400, int(distance), 20, 20);
-  ellipse(450, int(distance), 20, 20);
+void plot(){
+  if (sector == 0) { 
+    float distanceMapped = map(distance, 0, 200, width/2, 700);
+    println(distanceMapped);
+    ellipse(int(distanceMapped), height/2, 20, 20); 
+  }
+  if (sector == 2) {
+    float distanceMapped = map(distance, 0, 200, height/2, 10);
+    ellipse(width/2, int(distanceMapped), 20, 20);
+  }
+  if (sector == 4) {
+    float distanceMapped = map(distance, 0, 200, width/2, 100);
+    ellipse(int(distanceMapped), height/2, 20, 20); 
+  }
 }
 
 void getDistance() {
