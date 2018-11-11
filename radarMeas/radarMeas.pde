@@ -12,37 +12,16 @@ void setup() {
 
 void draw(){
   background(bgcolor);
-  grid(); 
-  circle();
-  sector = 0;
-  getDistance();
-  println("Sector "+ str(sector) + ": Range = " + distance + "cm");
-  //delay(1000);
-  plot();
   
-  grid(); 
-  circle();
-  sector = 2;
-  getDistance();
-  println("Sector "+ str(sector) + ": Range = " + distance + "cm");
-  //delay(1000);
-  plot();
-  
-  grid(); 
-  circle();
-  sector = 3;
-  getDistance();
-  println("Sector "+ str(sector) + ": Range = " + distance + "cm");
-  //delay(1000);
-  plot();
-  
-  grid(); 
-  circle();
-  sector = 4;
-  getDistance();
-  println("Sector "+ str(sector) + ": Range = " + distance + "cm");
-  //delay(1000);
-  plot();
+  for(sector = 0; sector <5; sector++){
+    grid(); 
+    circle();
+    getDistance();
+    println("Sector "+ str(sector) + ": Range = " + distance + "cm");
+    //delay(1000);
+    plot();
+  }
+ 
 }
 
  void circle(){
@@ -64,10 +43,19 @@ void grid(){
  
 void plot(){
   float distanceMapped;
+  float distanceMapped_X;
+  float distanceMapped_Y;
+  
   if (sector == 0) { 
     distanceMapped = map(distance, 0, 200, width/2, 700);
     println(distanceMapped);
     ellipse(int(distanceMapped), height/2, 20, 20); 
+  }
+  if (sector == 1) {
+    distanceMapped = map(distance, 0, 200, 0, 300);  // c (Hyp) 200cm  = 300 pixels
+    distanceMapped_X = map((distance*cos(45)), 0, 157, width/2, (width/2)+157); //a
+    distanceMapped_Y = map((distance*sin(45)), 0, 255, height/2, (height/2)-255);  //a
+    ellipse(int(distanceMapped_X), int(distanceMapped_Y), 20, 20); 
   }
   if (sector == 2) {
     distanceMapped = map(distance, 0, 200, height/2, 10);
@@ -75,8 +63,8 @@ void plot(){
   }
   if (sector == 3) {
     distanceMapped = map(distance, 0, 200, 0, 300);  // c (Hyp) 200cm  = 300 pixels
-    float distanceMapped_X = map((300*cos(45)), 0, 157, width/2, (width/2)-157); //a
-    float distanceMapped_Y = map((300*sin(45)), 0, 255, height/2, (height/2)-255);  //a
+    distanceMapped_X = map((distance*cos(45)), 0, 157, width/2, (width/2)-157); //a
+    distanceMapped_Y = map((distance*sin(45)), 0, 255, height/2, (height/2)-255);  //a
     ellipse(int(distanceMapped_X), int(distanceMapped_Y), 20, 20); 
   }
   if (sector == 4) {
