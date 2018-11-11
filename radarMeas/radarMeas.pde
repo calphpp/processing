@@ -30,6 +30,14 @@ void draw(){
   
   grid(); 
   circle();
+  sector = 3;
+  getDistance();
+  println("Sector "+ str(sector) + ": Range = " + distance + "cm");
+  //delay(1000);
+  plot();
+  
+  grid(); 
+  circle();
   sector = 4;
   getDistance();
   println("Sector "+ str(sector) + ": Range = " + distance + "cm");
@@ -55,17 +63,24 @@ void grid(){
 }}
  
 void plot(){
+  float distanceMapped;
   if (sector == 0) { 
-    float distanceMapped = map(distance, 0, 200, width/2, 700);
+    distanceMapped = map(distance, 0, 200, width/2, 700);
     println(distanceMapped);
     ellipse(int(distanceMapped), height/2, 20, 20); 
   }
   if (sector == 2) {
-    float distanceMapped = map(distance, 0, 200, height/2, 10);
+    distanceMapped = map(distance, 0, 200, height/2, 10);
     ellipse(width/2, int(distanceMapped), 20, 20);
   }
+  if (sector == 3) {
+    distanceMapped = map(distance, 0, 200, 0, 300);  // c (Hyp) 200cm  = 300 pixels
+    float distanceMapped_X = map((300*cos(45)), 0, 157, width/2, (width/2)-157); //a
+    float distanceMapped_Y = map((300*sin(45)), 0, 255, height/2, (height/2)-255);  //a
+    ellipse(int(distanceMapped_X), int(distanceMapped_Y), 20, 20); 
+  }
   if (sector == 4) {
-    float distanceMapped = map(distance, 0, 200, width/2, 100);
+    distanceMapped = map(distance, 0, 200, width/2, 100);
     ellipse(int(distanceMapped), height/2, 20, 20); 
   }
 }
