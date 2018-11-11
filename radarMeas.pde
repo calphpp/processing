@@ -51,7 +51,7 @@ void plot(){
     println(distanceMapped);
     ellipse(int(distanceMapped), height/2, 20, 20); 
   }
-  if (sector == 0) {
+  if (sector == 1) {
     distanceMapped = map(distance, 0, 200, 0, 300);  // c (Hyp) 200cm  = 300 pixels
     distanceMapped_X = map((distance*cos(45)), 0, 157, width/2, (width/2)+157); //a
     distanceMapped_Y = map((distance*sin(45)), 0, 255, height/2, (height/2)-255);  //a
